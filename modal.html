@@ -1,0 +1,61 @@
+<html dir="ltr">
+<head>
+	<meta charset="UTF-8"/>
+	<script src="./sol.js" defer></script>
+	<link rel="stylesheet" href ="./sol.css">
+</head>
+<body>
+<dialog id="dialog" open>
+	<h2 class="center-objects">New Search</h2>
+	<form method="dialog">
+		<div class="center-objects"><input id="lettersSequence" placeholder="Insert Sequence..." autocomplete="off" required></div>
+		<br>
+		<div class="search-options disabled">
+			<fieldset class="left-float half">
+				<legend>Count in:</legend>
+				<div class="flex-col">
+					<div class="center-left-text-block">
+						<input type="radio" id="wholePage" name="partsToCounts" value="wholePage" required>
+						<label for="wholePage">Whole page</label><br>
+
+						<input type="radio" id="onlyDisplayed" name="partsToCounts" value="onlyDisplayed">
+						<label for="onlyDisplayed">Only displayed</label><br>
+
+						<input type="radio" id="primarySection" name="partsToCounts" value="primarySection">
+						<label for="primarySection">Primary section</label>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="right-float half">
+				<legend>Sequence to count:</legend>
+				<div class="flex-col">
+					<div class="center-left-text-block">
+						<input type="radio" id="exactString" name="sequenceToCounts" value="exactString" required>
+						<label for="exactString">Exact sequence</label><br>
+
+						<input type="radio" id="stringPermutation" name="sequenceToCounts" value="stringPermutation">
+						<label for="stringPermutation">Sequence permutation<br></label>
+						<div class="show-if-active">
+							<input class="tab-indent" type="checkbox" id="stringPermutationLengthActive"
+									name="stringPermutationLength" value="stringPermutationLengthActive">
+							<label for="stringPermutationLengthActive">Permutation length:</label>
+
+							<input class="enable-if-checked" id="stringPermutationLengthField" name="stringPermutationLength" type="number" min="1" value="1">
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="horizontal-align-buttons">
+			<div class="inner-center">
+				<button class="flex-row-elm" type="reset" id="resetForm">Reset</button>
+				<button class="flex-row-elm disabled" id="countSequence">Count</button>
+				<button hidden class="flex-row-elm" id="closeDialog">Close</button>
+			</div>
+		</div>
+	</form>
+	<br><hr><br>
+	<h2 class="center-objects">Previous Searches</h2>
+</dialog>
+</body>
+</html>

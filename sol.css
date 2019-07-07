@@ -1,1 +1,108 @@
-/** write all your css here */
+.disabled {
+    color: gray;
+    pointer-events: none;
+}
+
+.center-objects {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tab-indent {
+    margin-left: 2em;
+}
+
+.left-float {
+    float: left;
+    clear: none;
+}
+
+.right-float {
+    float: right;
+    clear: none;
+}
+
+.half {
+    width: 50%;
+}
+
+.injected-search-button {
+    margin-left: 1em;
+}
+
+.injected-search-button::after {
+    content: 'Free cookies! 🍪🔍';
+}
+
+.search-options {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 0 2em;
+}
+
+.search-options > .flex-col {
+    flex: 1;
+}
+
+.horizontal-align-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1.5em 0 0 0;
+}
+
+.horizontal-align-buttons *> .flex-row-elm {
+    text-align: center;
+    margin: 0 2em;
+}
+
+.inner-center {
+    margin: 0 auto;
+}
+
+.center-left-text-block {
+    text-align: left;
+    display: inline-block;
+}
+
+.enable-if-checked {
+    pointer-events: none;
+    color: gray;
+}
+
+#stringPermutationLengthActive:checked ~ .enable-if-checked {
+    pointer-events: auto;
+    color: black;
+}
+
+.show-if-active {
+    opacity: 0;
+    overflow: hidden;
+}
+
+#stringPermutation:checked ~ .show-if-active {
+    opacity: 1;
+}
+
+dialog::backdrop {
+    background: rgba(255,0,0,.25);
+}
+
+legend {
+    font-weight: bold;
+}
+
+#dialog {
+    width: 570px;
+}
+
+#lettersSequence {
+    width: 70%;
+}
+
+#stringPermutationLengthField {
+    width: 3.2em;
+}
