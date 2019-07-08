@@ -45,13 +45,25 @@
     flex: 1;
 }
 
+.search-options > fieldset {
+    border: 2px groove threedface;
+    display: block;
+    margin: 0 2px;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+}
+
 .horizontal-align-buttons {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin: 0 auto;
     text-align: center;
-    padding: 1.5em 0 0 0;
+    margin: 1.5em 0;
 }
 
 .horizontal-align-buttons *> .flex-row-elm {
@@ -83,6 +95,65 @@
     overflow: hidden;
 }
 
+.sr-item {
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap;
+
+    margin: 0 1em 2em 1em;
+    padding-left: 1em;
+    border-left: 1px solid darkgray;
+
+}
+
+.sr-item > .sr-flex-first {
+    flex: 120px;
+}
+
+.sr-item > .sr-flex-last {
+    flex: 60%;
+}
+
+.sr-sequence-val {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.sr-title, .sr-val {
+    font-size: smaller;
+}
+
+.sr-title {
+    font-weight: bold;
+}
+
+/*!*.sr-item > .sr-title {*!*/
+/*.sr-title:first-child, :not(.sr-title) + .sr-title {*/
+/*    margin-left: 0;*/
+/*}*/
+
+.action-button {
+    display: inline-block;
+}
+
+.hidden-button {
+    display: none;
+}
+
+input[type=number] {
+    padding: 1px !important;
+    font-size: small;
+    margin-left: 5px;
+}
+
+#previous-searches > ol > li:last-of-type > .sr-item {
+    margin-bottom: 0;
+}
+
+.sr-val {
+    font-weight: normal;
+}
+
 #stringPermutation:checked ~ .show-if-active {
     opacity: 1;
 }
@@ -91,12 +162,34 @@ dialog::backdrop {
     background: rgba(255,0,0,.25);
 }
 
-legend {
+#dialog > legend {
     font-weight: bold;
+}
+
+#previous-searches > ol {
+    list-style-type: decimal !important;
+    margin: 0.3em 0 0 3.2em;
+    padding: 0;
 }
 
 #dialog {
     width: 570px;
+    /*height: 600px;*/
+    /*position: absolute;*/
+    top: 25%;
+    bottom: 25%;
+    left: 25%;
+    right: 25%;
+    font-size: initial;
+    font-weight: initial;
+}
+
+#dialog > hr {
+    margin: 1em 0;
+}
+
+#dialog > h1, h2 {
+    border: none;
 }
 
 #lettersSequence {
@@ -105,4 +198,9 @@ legend {
 
 #stringPermutationLengthField {
     width: 3.2em;
+}
+
+#previous-searches {
+    max-height: 210px;
+    overflow-x: hidden;
 }

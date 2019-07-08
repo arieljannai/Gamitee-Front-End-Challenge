@@ -38,7 +38,7 @@
 						<div class="show-if-active">
 							<input class="tab-indent" type="checkbox" id="stringPermutationLengthActive"
 									name="stringPermutationLength" value="stringPermutationLengthActive">
-							<label for="stringPermutationLengthActive">Permutation length:</label>
+							<label for="stringPermutationLengthActive">Desired length:</label>
 
 							<input class="enable-if-checked" id="stringPermutationLengthField" name="stringPermutationLength" type="number" min="1" value="1">
 						</div>
@@ -48,14 +48,50 @@
 		</div>
 		<div class="horizontal-align-buttons">
 			<div class="inner-center">
-				<button class="flex-row-elm" type="reset" id="resetForm">Reset</button>
-				<button class="flex-row-elm disabled" id="countSequence">Count</button>
-				<button hidden class="flex-row-elm" id="closeDialog">Close</button>
+				<button class="flex-row-elm action-button" type="reset" id="resetForm">Reset</button>
+				<button class="flex-row-elm action-button disabled" id="countSequence">Count</button>
+				<button class="flex-row-elm action-button hidden-button" id="closeDialog">Close</button>
 			</div>
 		</div>
 	</form>
-	<br><hr><br>
+	<hr>
 	<h2 class="center-objects">Previous Searches</h2>
+	<div id="previous-searches">
+		<ol>
+			<li>
+				<div class="sr-item">
+					<span class="sr-flex-first sr-sequence-val">Cacao</span>
+					<span class="sr-flex-last sr-title sr-found">Found: <span class="sr-val sr-found-val">91241</span></span>
+					<span class="sr-flex-first sr-title sr-times-done">Times done: <span class="sr-val sr-times-done-val">100000</span></span>
+					<span class="sr-flex-last sr-title sr-rank">Rank: <span class="sr-val sr-rank-val">1</span></span>
+				</div>
+			</li>
+			<li>
+				<div class="sr-item">
+					<span class="sr-flex-first sr-sequence-val">Cacao</span>
+					<span class="sr-flex-last sr-title sr-found">Found: <span class="sr-val sr-found-val">91241</span></span>
+					<span class="sr-flex-first sr-title sr-times-done">Times done: <span class="sr-val sr-times-done-val">100000</span></span>
+					<span class="sr-flex-last sr-title sr-rank">Rank: <span class="sr-val sr-rank-val">1</span></span>
+				</div>
+			</li>
+			<li>
+				<div class="sr-item">
+					<span class="sr-flex-first sr-sequence-val">Cacao</span>
+					<span class="sr-flex-last sr-title sr-found">Found: <span class="sr-val sr-found-val">91241</span></span>
+					<span class="sr-flex-first sr-title sr-times-done">Times done: <span class="sr-val sr-times-done-val">100000</span></span>
+					<span class="sr-flex-last sr-title sr-rank">Rank: <span class="sr-val sr-rank-val">1</span></span>
+				</div>
+			</li>
+			<li>
+				<div class="sr-item">
+					<span class="sr-flex-first sr-sequence-val">Cacao</span>
+					<span class="sr-flex-last sr-title sr-found">Found: <span class="sr-val sr-found-val">91241</span></span>
+					<span class="sr-flex-first sr-title sr-times-done">Times done: <span class="sr-val sr-times-done-val">100000</span></span>
+					<span class="sr-flex-last sr-title sr-rank">Rank: <span class="sr-val sr-rank-val">1</span></span>
+				</div>
+			</li>
+		</ol>
+	</div>
 </dialog>
 </body>
 </html>
