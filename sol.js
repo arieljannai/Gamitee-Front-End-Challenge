@@ -237,8 +237,58 @@ function request(method, data) {
 }
 
 function search() {
-    // let currSearch = storage[0];
+    let d = storage[0];
+    let currSearch = d['lettersSequence'];
+    let seqArr = [];
+    let occurrences = 0;
+
+    switch (d['sequenceToCounts']) {
+        case 'exactString':
+            seqArr.push(currSearch);
+            break;
+        case 'stringPermutation':
+            if (d['stringPermutationLengthActive']) {
+                seqArr = permutationsCustomLength(currSearch,  d['stringPermutationLengthField']);
+            } else {
+                seqArr = permutations(currSearch);
+            }
+            break;
+        default:
+            break;
+    }
+
+    seqArr.forEach(s => {
+        switch (d['partsToCounts']) {
+            case 'wholePage':
+                occurrences += searchAll(s, false);
+                break;
+            case 'onlyDisplayed':
+                occurrences += searchAll(s, true);
+                break;
+            case 'primarySection':
+                occurrences += searchMain(s);
+                break;
+            default:
+                break;
+        }
+    });
+
     return Math.floor(Math.random() * 100);
+    // return occurrences;
+}
+
+function searchMain(sequence) {
+
+}
+
+function searchAll(sequence, ignoreHidden) {
+    $((ignoreHidden ? ':not([style*="display: none"])' : '') + ':not(script)')
+        .contents()
+        .filter(function() {
+            return this.nodeType === 3;
+        }).filter(function() {
+            return this.data.indexOf("while") > -1;
+        }).length;
 }
 
 function isFormValid(alert) {
@@ -251,6 +301,34 @@ function isFormValid(alert) {
 
     return isValid;
 }
+
+function permutations(string) {
+    if (string.length < 2) {
+        return string;
+    }
+
+    let allPermutations = [];
+
+    for (let i = 0; i < string.length; i++) {
+        let char = string[i];
+
+        if (string.indexOf(char) !== i)
+            continue;
+
+        let remainingString = string.slice(0,i) + string.slice(i+1,string.length);
+
+        for (let subPermutation of permutations(remainingString))
+            allPermutations.push(char + subPermutation)
+    }
+
+    return allPermutations;
+}
+
+function permutationsCustomLength(string, len) {
+    return permutations(len < string.length ? string.slice(0, len) : string);
+}
+
+
 
 // jQuery additions
 
