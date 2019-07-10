@@ -3,6 +3,11 @@
     pointer-events: none;
 }
 
+.invisible {
+    opacity: 0;
+    z-index: -9;
+}
+
 .center-objects {
     text-align: center;
     vertical-align: middle;
@@ -46,7 +51,8 @@
 }
 
 .search-options > fieldset {
-    border: 2px groove threedface;
+    /*border: 2px groove rgb(211,211,211);*/
+    border: 2px groove rgba(211,211,211, 0.2);
     display: block;
     margin: 0 2px;
     margin-inline-start: 2px;
@@ -56,6 +62,13 @@
     padding-inline-end: 0.75em;
     padding-block-end: 0.625em;
     min-inline-size: min-content;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 0 2em;
 }
 
 .horizontal-align-buttons {
@@ -99,45 +112,79 @@
     display: flex;
     flex-direction: column;
     flex-flow: row wrap;
+    /*vertical-align: middle;*/
+    align-content: space-evenly;
+}
+
+.psr-item {
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap;
 
     margin: 0 1em 2em 1em;
     padding-left: 1em;
     border-left: 1px solid darkgray;
-
 }
 
-.sr-item > .sr-flex-first {
+.sr-item > .sr-flex-first, .psr-item > .psr-flex-first {
     flex: 120px;
 }
 
-.sr-item > .sr-flex-last {
+.sr-item > .sr-flex-last, .psr-item > .psr-flex-last {
     flex: 60%;
 }
 
-.sr-sequence-val {
+.search-results > .sr-item:first-child > .sr-title {
+    flex: unset;
+}
+
+.psr-sequence-val {
     font-size: larger;
     font-weight: bold;
 }
 
-.sr-title, .sr-val {
+.sr-title, .sr-val, .psr-title, .psr-val {
     font-size: smaller;
 }
 
-.sr-title {
+.sr-title, .psr-title {
     font-weight: bold;
 }
 
-/*!*.sr-item > .sr-title {*!*/
-/*.sr-title:first-child, :not(.sr-title) + .sr-title {*/
+/*!*.psr-item > .psr-title {*!*/
+/*.psr-title:first-child, :not(.psr-title) + .psr-title {*/
 /*    margin-left: 0;*/
 /*}*/
+
+.sr-left {
+    font-size: larger;
+    /*flex: 90%;*/
+    text-align: left;
+    padding-left: 2em;
+}
+
+.sr-right {
+    text-align: left;
+}
 
 .action-button {
     display: inline-block;
 }
 
-.hidden-button {
+.hidden-no-space {
     display: none;
+}
+
+.search-active-area {
+    display: flex;
+}
+
+.search-active-area > div {
+    width: 100%;
+}
+
+.search-active-area > div:nth-child(2) {
+    margin-left: -100%;
 }
 
 input[type=number] {
@@ -146,11 +193,11 @@ input[type=number] {
     margin-left: 5px;
 }
 
-#previous-searches > ol > li:last-of-type > .sr-item {
+#previous-searches > ol > li:last-of-type > .psr-item {
     margin-bottom: 0;
 }
 
-.sr-val {
+.sr-val, .psr-val {
     font-weight: normal;
 }
 
@@ -159,7 +206,7 @@ input[type=number] {
 }
 
 dialog::backdrop {
-    background: rgba(255,0,0,.25);
+    background: rgba(255,255,255,.25);
 }
 
 #dialog > legend {
@@ -176,7 +223,7 @@ dialog::backdrop {
     width: 570px;
     /*height: 600px;*/
     /*position: absolute;*/
-    top: 25%;
+    /*top: 25%;*/
     bottom: 25%;
     left: 25%;
     right: 25%;
