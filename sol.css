@@ -126,11 +126,19 @@
     border-left: 1px solid darkgray;
 }
 
-.sr-item > .sr-flex-first, .psr-item > .psr-flex-first {
+.psr-item > span:first-child {
+    flex: 100%;
+}
+
+.psr-item > span:not(:first-child) {
+    flex: 33%;
+}
+
+.sr-item > .sr-flex-first {
     flex: 120px;
 }
 
-.sr-item > .sr-flex-last, .psr-item > .psr-flex-last {
+.sr-item > .sr-flex-last {
     flex: 60%;
 }
 
