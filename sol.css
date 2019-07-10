@@ -223,10 +223,10 @@ dialog::backdrop {
     width: 570px;
     /*height: 600px;*/
     /*position: absolute;*/
-    /*top: 25%;*/
-    bottom: 25%;
-    left: 25%;
-    right: 25%;
+    top: 15%;
+    /*bottom: 25%;*/
+    /*left: 25%;*/
+    /*right: 25%;*/
     font-size: initial;
     font-weight: initial;
 }
