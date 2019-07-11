@@ -3,6 +3,12 @@ let server = null;
 let storage = [];
 let isGetDone = false, isPostDone = false;
 
+// selectors that are probably not on the main part, so can be excluded from main part search
+let notMainPartElements =
+    'head, meta, script, header, ' +
+    'footer, nav, aside, link, svg, img, ' +
+    '[id*=nav], [class*=nav], [role*=nav], [class*=head], .toc';
+
 // saving some elements to reduce the number of searches
 let sequenceLength, lettersSequence, resultsStatsBlock,
     searchOptions, searchResults, previousSearches, previousSearchesSection,
@@ -273,22 +279,31 @@ function search() {
         }
     });
 
-    return Math.floor(Math.random() * 100);
-    // return occurrences;
+    return occurrences;
 }
 
 function searchMain(sequence) {
+    let content = $('article').or('#content').or('body').clone();
+    content.find(notMainPartElements).remove();
 
+    return content.find(':contains(' + sequence + ')').contents()
+                .filter(function() {
+                    return this.nodeType === Node.TEXT_NODE;
+                }).filter(function() {
+                    return this.data.indexOf(sequence) > -1;
+                }).map(function() {
+                    return this.data.split(sequence).length - 1;
+                }).toArray().reduce((a, b) => a + b);
 }
 
 function searchAll(sequence, ignoreHidden) {
-    $((ignoreHidden ? ':not([style*="display: none"])' : '') + ':not(script)')
-        .contents()
-        .filter(function() {
-            return this.nodeType === 3;
-        }).filter(function() {
-            return this.data.indexOf("while") > -1;
-        }).length;
+    return $((ignoreHidden ? ':not([style*="display: none"])' : '') + ':not(script)')
+                .contents()
+                .filter(function() {
+                    return this.nodeType === Node.TEXT_NODE;
+                }).filter(function() {
+                    return this.data.indexOf(sequence) > -1;
+                }).length;
 }
 
 function isFormValid(alert) {
