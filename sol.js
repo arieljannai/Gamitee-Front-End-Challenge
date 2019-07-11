@@ -219,14 +219,19 @@ document.addEventListener('scripts-loaded', () => {
 
             storage.unshift(countButton.data());
 
-            let searchResult = search();
-            storage[0]['result'] = searchResult;
+            modalDialog.addClass('disabled');
+            // let searchResult = search();
 
-            server.open('GET');
-            server.send(searchResult);
+            search().then(searchResult => {
+                storage[0]['result'] = searchResult;
+                modalDialog.removeClass('disabled');
 
-            server.open('POST');
-            server.send(searchResult);
+                server.open('GET');
+                server.send(searchResult);
+
+                server.open('POST');
+                server.send(searchResult);
+            });
         }
 
         e.preventDefault();
@@ -243,43 +248,46 @@ function request(method, data) {
 }
 
 function search() {
-    let d = storage[0];
-    let currSearch = d['lettersSequence'];
-    let seqArr = [];
-    let occurrences = 0;
+    return new Promise((resolve, reject) => {
+        let d = storage[0];
+        let currSearch = d['lettersSequence'];
+        let seqArr = [];
+        let occurrences = 0;
 
-    switch (d['sequenceToCounts']) {
-        case 'exactString':
-            seqArr.push(currSearch);
-            break;
-        case 'stringPermutation':
-            if (d['stringPermutationLengthActive']) {
-                seqArr = permutationsCustomLength(currSearch,  d['stringPermutationLengthField']);
-            } else {
-                seqArr = permutations(currSearch);
-            }
-            break;
-        default:
-            break;
-    }
-
-    seqArr.forEach(s => {
-        switch (d['partsToCounts']) {
-            case 'wholePage':
-                occurrences += searchAll(s, false);
+        switch (d['sequenceToCounts']) {
+            case 'exactString':
+                seqArr.push(currSearch);
                 break;
-            case 'onlyDisplayed':
-                occurrences += searchAll(s, true);
-                break;
-            case 'primarySection':
-                occurrences += searchMain(s);
+            case 'stringPermutation':
+                if (d['stringPermutationLengthActive']) {
+                    seqArr = permutationsCustomLength(currSearch,  d['stringPermutationLengthField']);
+                } else {
+                    seqArr = permutations(currSearch);
+                }
                 break;
             default:
                 break;
         }
-    });
 
-    return occurrences;
+        seqArr.forEach(s => {
+            switch (d['partsToCounts']) {
+                case 'wholePage':
+                    occurrences += searchAll(s, false);
+                    break;
+                case 'onlyDisplayed':
+                    occurrences += searchAll(s, true);
+                    break;
+                case 'primarySection':
+                    occurrences += searchMain(s);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        // return occurrences;
+        return resolve(occurrences);
+    });
 }
 
 function searchMain(sequence) {
@@ -324,16 +332,21 @@ function permutations(string) {
 
     let allPermutations = [];
 
-    for (let i = 0; i < string.length; i++) {
+    let lengthLimit = 7;
+    if (string.length > lengthLimit) {
+        console.info('Note: the sequence length is longer the the length limit.\nTruncating it to ' + lengthLimit);
+    }
+
+    for (let i = 0; i < Math.min(string.length, lengthLimit); i++) {
         let char = string[i];
 
-        if (string.indexOf(char) !== i)
-            continue;
+        if (string.indexOf(char) !== i) { continue; }
 
-        let remainingString = string.slice(0,i) + string.slice(i+1,string.length);
+        let remainingString = string.slice(0, i) + string.slice(i + 1, string.length);
 
-        for (let subPermutation of permutations(remainingString))
+        for (let subPermutation of permutations(remainingString)) {
             allPermutations.push(char + subPermutation)
+        }
     }
 
     return allPermutations;
